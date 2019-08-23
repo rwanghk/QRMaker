@@ -1,3 +1,5 @@
+# Deprecated 
+
 # QRMaker
 Partial cn1lib port of zxing, supports Unicode characters
 
