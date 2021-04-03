@@ -98,17 +98,17 @@ public final class QREncoder {
         appendBytes(content, mode, dataBits, encoding);
 
         Version version;
-        /*
-    if (hints != null && hints.containsKey(EncodeHintType.QR_VERSION)) {
-      int versionNumber = Integer.parseInt(hints.get(EncodeHintType.QR_VERSION).toString());
-      version = Version.getVersionForNumber(versionNumber);
-      int bitsNeeded = calculateBitsNeeded(mode, headerBits, dataBits, version);
-      if (!willFit(bitsNeeded, version, ecLevel)) {
-        throw new IllegalArgumentException("Data too big for requested version");
-      }
-    } else {*/
-        version = recommendVersion(ecLevel, mode, headerBits, dataBits);
-        /*  }*/
+    
+        if (hints != null && hints.containsKey(EncodeHintType.QR_VERSION)) {
+            int versionNumber = Integer.parseInt(hints.get(EncodeHintType.QR_VERSION).toString());
+            version = Version.getVersionForNumber(versionNumber);
+            int bitsNeeded = calculateBitsNeeded(mode, headerBits, dataBits, version);
+            if (!willFit(bitsNeeded, version, ecLevel)) {
+                throw new IllegalArgumentException("Data too big for requested version");
+            }
+        } else {
+            version = recommendVersion(ecLevel, mode, headerBits, dataBits);
+        }
 
         BitArray headerAndDataBits = new BitArray();
         headerAndDataBits.appendBitArray(headerBits);
